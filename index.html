@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Mood Shape</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 40px;
+      background: #f0f0f0;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .controls {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      padding: 10px 15px;
+      border: 2px solid #ccc;
+      border-radius: 6px;
+      background: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    input[type="radio"]:checked + label {
+      border-color: #000;
+      background: #ddd;
+    }
+
+    .canvas {
+      position: relative;
+      width: 300px;
+      height: 300px;
+      margin: 0 auto;
+      border: 3px dashed #aaa;
+      background: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .shape {
+      display: none;
+      width: 100px;
+      height: 100px;
+      animation: fadein 0.3s ease-in-out;
+    }
+
+    .circle { border-radius: 50%; }
+    .square { }
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 50px solid transparent;
+      border-right: 50px solid transparent;
+      border-bottom: 100px solid;
+      background: none;
+    }
+
+    /* Animation */
+    @keyframes fadein {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Show shape with correct color */
+    #circle:checked ~ #red:checked ~ .canvas .circle.red,
+    #circle:checked ~ #blue:checked ~ .canvas .circle.blue,
+    #circle:checked ~ #green:checked ~ .canvas .circle.green,
+
+    #square:checked ~ #red:checked ~ .canvas .square.red,
+    #square:checked ~ #blue:checked ~ .canvas .square.blue,
+    #square:checked ~ #green:checked ~ .canvas .square.green,
+
+    #triangle:checked ~ #red:checked ~ .canvas .triangle.red,
+    #triangle:checked ~ #blue:checked ~ .canvas .triangle.blue,
+    #triangle:checked ~ #green:checked ~ .canvas .triangle.green {
+      display: block;
+    }
+
+    /* Colors */
+    .red { background: red; }
+    .blue { background: blue; }
+    .green { background: green; }
+
+    .triangle.red { border-bottom-color: red; }
+    .triangle.blue { border-bottom-color: blue; }
+    .triangle.green { border-bottom-color: green; }
+  </style>
+</head>
+<body>
+
+  <h1>Mood Shape</h1>
+
+  <!-- Radio inputs must come first for CSS to target correctly -->
+  <input type="radio" name="shape" id="circle" checked>
+  <input type="radio" name="shape" id="square">
+  <input type="radio" name="shape" id="triangle">
+
+  <input type="radio" name="color" id="red" checked>
+  <input type="radio" name="color" id="blue">
+  <input type="radio" name="color" id="green">
+
+  <div class="controls">
+    <div class="group">
+      <strong>Choose a Shape:</strong>
+      <label for="circle">Circle</label>
+      <label for="square">Square</label>
+      <label for="triangle">Triangle</label>
+    </div>
+    <div class="group">
+      <strong>Choose a Color:</strong>
+      <label for="red">Red</label>
+      <label for="blue">Blue</label>
+      <label for="green">Green</label>
+    </div>
+  </div>
+
+  <div class="canvas">
+    <!-- Circle versions -->
+    <div class="shape circle red"></div>
+    <div class="shape circle blue"></div>
+    <div class="shape circle green"></div>
+
+    <!-- Square versions -->
+    <div class="shape square red"></div>
+    <div class="shape square blue"></div>
+    <div class="shape square green"></div>
+
+    <!-- Triangle versions -->
+    <div class="shape triangle red"></div>
+    <div class="shape triangle blue"></div>
+    <div class="shape triangle green"></div>
+  </div>
+
+</body>
+</html>
